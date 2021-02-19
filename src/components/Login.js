@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,17 +10,17 @@ import Link from '@material-ui/core/Link';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import './Login.css'
+import './Login.css';
+import { login } from '../utils';
 
-export default class Login extends Component{
+export default class Login extends Component {
 
-    constructor(props){
-        super(props);
-        this.state = {email:'',password:''};
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    render(){
+    state = {
+        email: "",
+        password: "",
+    };
+
+    render() {
         return (
             <React.Fragment>
                 <CssBaseline />
@@ -33,7 +33,7 @@ export default class Login extends Component{
                         <form className="form" onSubmit={this.handleSubmit}>
                             <FormControl margin="normal" required fullWidth>
                                 <InputLabel htmlFor="email">Email Address</InputLabel>
-                                <Input id="email" name="email" autoComplete="email" onChange={this.handleChange}autoFocus />
+                                <Input id="email" name="email" autoComplete="email" onChange={this.handleChange} autoFocus />
                             </FormControl>
                             <FormControl margin="normal" required fullWidth>
                                 <InputLabel htmlFor="password">Password</InputLabel>
@@ -64,19 +64,21 @@ export default class Login extends Component{
                             </Grid>
                         </Grid>
                     </Paper>
-                    
+
                 </main>
             </React.Fragment>
         );
     }
-    handleChange(e){
-        this.setState({[e.target.name]: e.target.value,});
+
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value, });
     }
-    handleSubmit(e) {
+
+    handleSubmit = (e) => {
         e.preventDefault();
-        if(this.state.email.length && this.state.password.length){
-            localStorage.setItem('user', this.state.email);
+        if (this.state.email.length && this.state.password.length) {
+            login();
         }
-        this.props.validateLogin();
+        this.props.history.push('/todo');
     }
 }

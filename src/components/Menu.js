@@ -18,6 +18,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -93,8 +94,8 @@ export default function PersistentDrawerLeft(props) {
 
   const handleOnClick = () => {
     localStorage.clear();
-    props.validateLogin();
-}
+    props.logout();
+  }
 
   return (
     <div className={classes.root}>
@@ -116,7 +117,7 @@ export default function PersistentDrawerLeft(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Todo App 
+            Todo App
           </Typography>
         </Toolbar>
       </AppBar>
@@ -136,18 +137,18 @@ export default function PersistentDrawerLeft(props) {
         </div>
         <Divider />
         <List>
-            <ListItem button key={'User'}>
+          <ListItem button key={'User'}>
             <ListItemIcon><AccountBoxIcon /></ListItemIcon>
             <ListItemText primary={localStorage.getItem('user')} />
-            </ListItem>
-          </List>
-          <Divider />
-          <List>
-            <ListItem button key={'logout'}>
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+          <ListItem button key={'logout'}>
             <ListItemIcon><ExitToAppIcon /></ListItemIcon>
             <ListItemText onClick={handleOnClick} primary={'Logout'} />
-            </ListItem>
-          </List>
+          </ListItem>
+        </List>
       </Drawer>
       <main
         className={clsx(classes.content, {
